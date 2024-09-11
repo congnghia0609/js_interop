@@ -1,7 +1,7 @@
 import 'dart:html';
-import 'dart:js';
-// import 'dart:js' as js;
-import 'dart:js_util';
+// import 'dart:js';
+import 'dart:js' as js;
+import 'dart:js_util' as jsu;
 import 'package:flutter/material.dart';
 
 
@@ -12,7 +12,7 @@ void myDartFunction(String message) {
 
 void main() {
   // Đăng ký function để có thể gọi từ JavaScript
-  setProperty(window, 'registerMyDartFunction', allowInterop(myDartFunction));
+  jsu.setProperty(window, 'registerMyDartFunction', js.allowInterop(myDartFunction));
 
   // Khởi chạy ứng dụng Flutter
   runApp(const MyApp());
@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
     print("Complete init MyHomePage");
     // Gọi ra hàm toàn cục ở index.html
     // Ref: https://stackoverflow.com/questions/71535884/how-to-call-a-js-function-from-flutter-web
-    context.callMethod("callDartFunction", []);
+    js.context.callMethod("callDartFunction", []);
   }
 
   void _incrementCounter() {
